@@ -29,21 +29,22 @@
             >
 
             <EditText
-                android:id="@+id/inputUnits"
+                android:id="@+id/inputValue"
                 android:text="Value to convert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
 
-            <TextView
-                android:id="@+id/outputTxt"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/inputUnitsSpinner"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="input units"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
         </LinearLayout>
 

@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">CS441_UnitConverter</string>
     <string name="action_settings">Settings</string>
+    <string-array name="unitsToConvert">
+        <item>mm</item>
+        <item>m</item>
+        <item>km</item>
+        <item>mg</item>
+        <item>g</item>
+        <item>kg</item>
+        <item>ml</item>
+        <item>l</item>
+        <item>kl</item>
+    </string-array>
 </resources>

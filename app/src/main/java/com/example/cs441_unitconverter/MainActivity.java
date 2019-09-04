@@ -11,10 +11,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,18 +28,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        final Spinner unitSpinner = findViewById(R.id.inputUnitsSpinner);
+        final ArrayAdapter<CharSequence> unitSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.unitsToConvert, R.layout.support_simple_spinner_dropdown_item);
+        unitSpinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        unitSpinner.setAdapter(unitSpinnerAdapter);
+        unitSpinner.setOnItemSelectedListener(this);
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText input = findViewById(R.id.inputUnits);
-                TextView output = findViewById(R.id.outputTxt);
-                int inp = Integer.parseInt(input.getText().toString());
-                output.setText(Integer.toString(2 * inp));
+                EditText input = findViewById(R.id.inputValue);
+                Double val = Double.parseDouble(input.getText().toString());
+                Double stdVal = val;
+                String unit = unitSpinner.getSelectedItem().toString();
+                if(unit.length() == 2) {
+                    if(unit.charAt(0) == 'm') {
+                        stdVal = val / 1000;
+                    }
+                    else if(unit.charAt(0) == 'k') {
+                        stdVal = val * 1000;
+                    }
+                }
+                LinearLayout outputTable = (LinearLayout)findViewById(R.id.outputTable);
+                for(int i = 0; i < outputTable.getChildCount(); i++) {
+                    LinearLayout tempLayout = (LinearLayout)outputTable.getChildAt(i);
+                }
+
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,5 +82,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
