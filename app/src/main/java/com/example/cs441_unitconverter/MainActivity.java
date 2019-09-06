@@ -22,6 +22,11 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     @Override
@@ -42,8 +47,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
                 EditText input = findViewById(R.id.inputValue);
-                Double val = Double.parseDouble(input.getText().toString());
-                Double stdVal = val;
+                double val = Double.parseDouble(input.getText().toString());
+                double stdVal = val;
                 String unit = unitSpinner.getSelectedItem().toString();
                 if(unit.length() == 2) {
                     if(unit.charAt(0) == 'm') {
@@ -54,15 +59,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
                 }
                 LinearLayout outputTable = findViewById(R.id.outputTable);
-                LinearLayout tempLayout = (LinearLayout)outputTable.getChildAt(0);
-                TextView tempView = (TextView)tempLayout.getChildAt(0);
-                tempView.setText(Double.toString(stdVal / 1000));
-                tempLayout = (LinearLayout)outputTable.getChildAt(1);
-                tempView = (TextView)tempLayout.getChildAt(0);
-                tempView.setText(Double.toString(stdVal));
-                tempLayout = (LinearLayout)outputTable.getChildAt(2);
-                tempView = (TextView)tempLayout.getChildAt(0);
-                tempView.setText(Double.toString(stdVal * 1000));S
+                double[] coefficients = new double[]{1000., 1., .001};
+                char[] prefixes = new char[]{'m', ' ', 'k'};
+                for(int i=0; i < outputTable.getChildCount(); i++) {
+                    LinearLayout tempLayout = (LinearLayout)outputTable.getChildAt(i);
+                    TextView tempView = (TextView)tempLayout.getChildAt(0);
+                    double convertedVal = stdVal * coefficients[i];
+                    DecimalFormat df = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.getDefault())); // Used to cut off trailing zeroes
+                    df.setMaximumFractionDigits(340);
+                    tempView.setText(df.format(convertedVal));
+                    tempView = (TextView)tempLayout.getChildAt(1);
+                    tempView.setText(String.format(" %c%c", prefixes[i], unit.charAt(unit.length()-1)));
+                }
             }
         });
     }
