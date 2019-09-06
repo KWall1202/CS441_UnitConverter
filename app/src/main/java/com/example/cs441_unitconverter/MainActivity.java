@@ -20,6 +20,8 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     @Override
@@ -51,11 +53,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         stdVal = val * 1000;
                     }
                 }
-                LinearLayout outputTable = (LinearLayout)findViewById(R.id.outputTable);
-                for(int i = 0; i < outputTable.getChildCount(); i++) {
-                    LinearLayout tempLayout = (LinearLayout)outputTable.getChildAt(i);
-                }
-
+                LinearLayout outputTable = findViewById(R.id.outputTable);
+                LinearLayout tempLayout = (LinearLayout)outputTable.getChildAt(0);
+                TextView tempView = (TextView)tempLayout.getChildAt(0);
+                tempView.setText(Double.toString(stdVal / 1000));
+                tempLayout = (LinearLayout)outputTable.getChildAt(1);
+                tempView = (TextView)tempLayout.getChildAt(0);
+                tempView.setText(Double.toString(stdVal));
+                tempLayout = (LinearLayout)outputTable.getChildAt(2);
+                tempView = (TextView)tempLayout.getChildAt(0);
+                tempView.setText(Double.toString(stdVal * 1000));S
             }
         });
     }
