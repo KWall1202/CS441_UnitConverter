@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         });
+        fab.callOnClick();
     }
 
 

@@ -19,6 +19,16 @@
         app:layout_constraintTop_toTopOf="parent"
         >
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Input a value and units to convert!"
+            />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,9 +40,10 @@
 
             <EditText
                 android:id="@+id/inputValue"
-                android:text="Value to convert"
+                android:text="0.00"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
                 />
 
             <Spinner
@@ -67,7 +78,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kilo"
                     />
 
             </LinearLayout>
@@ -84,7 +94,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     />
 
             </LinearLayout>
@@ -101,7 +110,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Milli"
                     />
 
             </LinearLayout>
