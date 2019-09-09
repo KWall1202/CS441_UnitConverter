@@ -50,12 +50,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 double val = Double.parseDouble(input.getText().toString());
                 double stdVal = val;
                 String unit = unitSpinner.getSelectedItem().toString();
-                if(unit.length() == 2) {
+                if(unit.length() > 1) {
                     if(unit.charAt(0) == 'm') {
                         stdVal = val / 1000;
+                        unit = unit.substring(1);
                     }
                     else if(unit.charAt(0) == 'k') {
                         stdVal = val * 1000;
+                        unit = unit.substring(1);
                     }
                 }
                 LinearLayout outputTable = findViewById(R.id.outputTable);
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     df.setMaximumFractionDigits(340);
                     tempView.setText(df.format(convertedVal));
                     tempView = (TextView)tempLayout.getChildAt(1);
-                    tempView.setText(String.format(" %c%c", prefixes[i], unit.charAt(unit.length()-1)));
+                    tempView.setText(String.format(" %c%s", prefixes[i], unit));
                 }
             }
         });
