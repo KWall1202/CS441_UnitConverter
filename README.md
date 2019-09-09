@@ -11,13 +11,13 @@ Once inputs have been given, pressing the blue button with the black logo will d
 
 ## App Screenshots
 App default opening
-[!Screenshot1](images/Screenshot1.png)
+![Screenshot1](images/Screenshot1.png)
 
 Selecting an input unit
-[!Screenshot2](images/Screenshot2.png)
+![Screenshot2](images/Screenshot2.png)
 
 Output after conversion
-[!Screenshot3](images/Screenshot3.png)
+![Screenshot3](images/Screenshot3.png)
 
 
 ## Production Log
